@@ -11,10 +11,10 @@ function encodeHTML(e){
 }
 
 //ASYNCHRONOUS FUNCTIONALITY
-/*var t = setInterval(timer, 2000);
+var t = setInterval(timer, 2000);
 function timer(){
     outPutData();
-}*/
+}
 
 //GET -- find all the fruits in the database
 fetch("https://se3316-nhall27-lab3-nhall27.c9users.io/products/findAll")
