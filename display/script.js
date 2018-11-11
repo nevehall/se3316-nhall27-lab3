@@ -5,48 +5,16 @@ outPutData();//calling function
 
 console.log('why');
 
-function frenchLanguage(){
-    document.getElementById("fruitShelf").innerHTML = "Plateau de Fruits";
-    document.getElementById("pickFruit").innerHTML = "Cueillir un Fruit";
-    document.getElementById("nameTitle").innerHTML = "Prénom";
-    document.getElementById("addFruitTitle").innerHTML = "Ajouter un Fruit";
-    document.getElementById("quantityTitle").innerHTML = "Quantité";
-    document.getElementById("priceTitle").innerHTML = "Prix";
-    document.getElementById("taxTitle").innerHTML = "Impôt";
-    document.getElementById("addButton").innerHTML = "Ajouter";
+//SANITIZATION
+function encodeHTML(e){
+    return e.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
 }
 
-function englishLanguage(){
-    document.getElementById("fruitShelf").innerHTML = "Fruit Shelf";
-    document.getElementById("pickFruit").innerHTML = "Pick a fruit";
-    document.getElementById("nameTitle").innerHTML = "Name";
-    document.getElementById("addFruitTitle").innerHTML = "Add a Fruit";
-    document.getElementById("quantityTitle").innerHTML = "Quantity";
-    document.getElementById("priceTitle").innerHTML = "Price";
-    document.getElementById("taxTitle").innerHTML = "Tax";
-    document.getElementById("addButton").innerHTML = "Add";
-}
-
-//GET -- get the specific id of each fruit
-function getID(){
-    var i = 0;
-    var id =0;
-    fetch('/products/')
-        .then(function(response){
-            return response.json();
-        })
-        .then(function(data){
-            console.log('the data', data);
-            console.log(data.length);
-            if(data.length>0){
-                id = data[i]._id;
-                console.log(data[i]._id)
-            }
-            //console.log(id)
-            return id;
-        })
-}
-//var id1 = getID()
+//ASYNCHRONOUS FUNCTIONALITY
+/*var t = setInterval(timer, 2000);
+function timer(){
+    outPutData();
+}*/
 
 //GET -- find all the fruits in the database
 fetch("https://se3316-nhall27-lab3-nhall27.c9users.io/products/findAll")
@@ -58,6 +26,7 @@ fetch("https://se3316-nhall27-lab3-nhall27.c9users.io/products/findAll")
     })
     
 function outPutData(){
+    var i = 0;
     //console.log('first');
     deleteFrontFruit();
     //console.log('hello');
@@ -66,16 +35,15 @@ function outPutData(){
         return response.json();
     })
     .then(function(data){
-    
-        for(var i=0;i<data.length;i++){
-            
+        
+        for(i=0;i<data.length;i++){
             var basketHeader = document.createElement("h3");
             basketHeader.setAttribute('id', 'bask');
             var basketText = document.createTextNode("Basket");
             basketHeader.appendChild(basketText);
             document.body.appendChild(basketHeader);
             var list = document.createElement("li");
-            var nameToList = data[i].name; //document.getElementById("nameInput").value;
+            var nameToList = encodeHTML(data[i].name); //document.getElementById("nameInput").value;
             var quantityToList = data[i].quantity; //document.getElementById("quantityInput").value;
             var priceToList = data[i].price; //document.getElementById("priceInput").value;
             var taxToList = data[i].tax; //document.getElementById("taxInput").value;
@@ -92,7 +60,7 @@ function outPutData(){
             //list.appendChild((document.createElement("span")).deleteBtn)
             //^trying to get the button beside the added fruit
             deleteBtn.onclick = deleteFruit;
-            deleteBtn.onclick = function(){deleteFruit(this.id); alert('Deleting item!'); deleteFrontFruit(); outPutData()};
+            deleteBtn.onclick = function(){deleteFruit(this.id); alert('Deleting item!'); outPutData()};
             
             //adding an update button beside each fruit
             var updateBtn = document.createElement("button");
@@ -103,7 +71,7 @@ function outPutData(){
             document.body.appendChild(updateBtn);
             updateBtn.onclick = updateFruit;
             updateBtn.onclick = function(){updateFruit(this.id); outPutData()};
-            
+        
         }
     })
 }    
@@ -129,9 +97,9 @@ function addFruit(){
     .then(response => console.log('Success:', JSON.stringify(response)))
     .catch(error => console.error('Error:', error)); 
     
+    
+    console.log('bye neve');
     outPutData();
-    var id = document.getElementsByTagName("li")[0].setAttribute('id', 'fruitID');
-    console.log('id');
     
 }
 
@@ -164,13 +132,23 @@ function deleteFrontFruit(){
     }
     
     var deleBtn = document.querySelectorAll('.delete');
-    console.log(deleBtn);
-    console.log(deleBtn.length);
-    
+    //console.log(deleBtn);
+    //console.log(deleBtn.length);
     for(var i=0; i< deleBtn.length;i++){
         
         deleBtn[i].remove();
     }
+    
+    
+    var upBtn = document.querySelectorAll('.update');
+    console.log(upBtn);
+    for(var i=0; i< upBtn.length;i++){
+        
+        upBtn[i].remove();
+    }
+    
+    
+    
     
    
 }
@@ -185,14 +163,6 @@ function updateFruit(id2){
         tax: document.getElementById("taxUpdate").value
     }
     
-    var updBtn = document.querySelectorAll('.update');
-    console.log(updBtn);
-    console.log(updBtn.length);
-    
-    for(var i=0; i<updBtn.length;i++){
-        updBtn[i].remove();
-    }
-    //console.log(data);
     
     fetch(urlPut, {
       method: 'PUT',
@@ -201,7 +171,7 @@ function updateFruit(id2){
         'Content-Type': 'application/json'
       }
     }).then(res => res)
-    .then(response => response.json())
+    .then(response => response)
     .catch(error => console.error('Error:', error))
     .then(response => console.log('Success:', JSON.stringify(response)));
     //console.log('request sent');
@@ -210,7 +180,7 @@ function updateFruit(id2){
 //SEARCH function
 function search(){
     console.log('searching');
-    var nameToSearch = document.getElementById("searchInput").value.toLowerCase();
+    var nameToSearch = encodeHTML(document.getElementById("searchInput").value.toLowerCase());
     //console.log(nameToSearch);
 
     fetch("https://se3316-nhall27-lab3-nhall27.c9users.io/products/findAll")
