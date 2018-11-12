@@ -5,8 +5,6 @@
 //FIND ALL FRUITS IN THE DATABASE -- output all the fruits currently in the database
 outPutData();
 
-console.log('why');
-
 //SANITIZATION
 function encodeHTML(e){
     return e.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
@@ -29,9 +27,7 @@ fetch("https://se3316-nhall27-lab3-nhall27.c9users.io/products/findAll")
     
 function outPutData(){
     var i = 0;
-    //console.log('first');
     deleteFrontFruit();
-    //console.log('hello');
     fetch("https://se3316-nhall27-lab3-nhall27.c9users.io/products/findAll")
     .then(function(response){
         return response.json();

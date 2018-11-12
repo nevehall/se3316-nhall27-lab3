@@ -1,3 +1,14 @@
 h1 { color: #DC143C; font-family: 'Rouge Script', cursive; font-size: 80px; font-weight: normal; line-height: 48px; margin: 40px 0 50px; text-align: center; text-shadow: 1px 1px 2px #082b34; }
 
-h3 { color: #a7e8f8; font-family: 'Julius Sans One', sans-serif; font-size: 22px; font-weight: bold; line-height: 32px; margin: 0 0 24px; text-shadow: 1px 1px 1px #082b34; }
+h3 { color: #00BFFF; font-family: 'Julius Sans One', sans-serif; font-size: 22px; font-weight: bold; line-height: 32px; margin: 25px 0 0; text-shadow: 1px 1px 1px #082b34; }
+
+h5{margin: 0 0 0; padding: 0 0 0}
+
+body{
+    background-image: url(fruitShelf.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+a { color: #000000; font-family: 'Carme', sans-serif; font-size: 16px; line-height: 24px; margin: 0 0 24px; }
+div{ color: #000000; font-family: 'Carme', sans-serif; font-size: 16px; line-height: 24px; margin: 0 0 0; }
