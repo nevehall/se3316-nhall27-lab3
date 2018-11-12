@@ -1,10 +1,5 @@
 //controllers/products.js
 
-//SANITIZATION -- server side
-function encodeHTML(e){
-    return e.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
-}
-
 
 exports.product_details = function (req, res) {
     Product.findById(req.params.id, function (err, product) {
@@ -14,8 +9,13 @@ exports.product_details = function (req, res) {
 };
 
 exports.product_create = function (req, res) {
+    //SANITIZATION -- server side
+    function encodeHTML(e){
+    return e.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
+    }
     let product = new Product(
         {
+            
             name: encodeHTML(req.body.name),
             quantity: req.body.quantity,
             price: req.body.price,
