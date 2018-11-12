@@ -11,10 +11,10 @@ function encodeHTML(e){
 }
 
 //ASYNCHRONOUS FUNCTIONALITY
-var t = setInterval(timer, 2000);
+/*var t = setInterval(timer, 2000);
 function timer(){
     outPutData();
-}
+}*/
 
 //GET -- find all the fruits in the database
 fetch("https://se3316-nhall27-lab3-nhall27.c9users.io/products/findAll")
@@ -57,8 +57,6 @@ function outPutData(){
             var deleteText = document.createTextNode("Delete");
             deleteBtn.appendChild(deleteText);
             document.body.appendChild(deleteBtn);
-            //list.appendChild((document.createElement("span")).deleteBtn)
-            //^trying to get the button beside the added fruit
             deleteBtn.onclick = deleteFruit;
             deleteBtn.onclick = function(){deleteFruit(this.id); alert('Deleting item!'); outPutData()};
             
@@ -97,8 +95,6 @@ function addFruit(){
     .then(response => console.log('Success:', JSON.stringify(response)))
     .catch(error => console.error('Error:', error)); 
     
-    
-    console.log('bye neve');
     outPutData();
     
 }
@@ -132,8 +128,6 @@ function deleteFrontFruit(){
     }
     
     var deleBtn = document.querySelectorAll('.delete');
-    //console.log(deleBtn);
-    //console.log(deleBtn.length);
     for(var i=0; i< deleBtn.length;i++){
         
         deleBtn[i].remove();
@@ -203,6 +197,7 @@ function search(){
                 if(i==data.length-1){
                     alert('The fruit you are looking for does not exist in this database. Sorry!');
                 }
+                
             }
         })
     
