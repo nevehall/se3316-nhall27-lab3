@@ -1,7 +1,9 @@
 //Neve Hall
 //3316 lab 3
 //script.js 
-outPutData();//calling function
+
+//FIND ALL FRUITS IN THE DATABASE -- output all the fruits currently in the database
+outPutData();
 
 console.log('why');
 
@@ -37,16 +39,14 @@ function outPutData(){
     .then(function(data){
         
         for(i=0;i<data.length;i++){
-            var basketHeader = document.createElement("h3");
+            var basketHeader = document.createElement("div");
             basketHeader.setAttribute('id', 'bask');
-            var basketText = document.createTextNode("Basket");
-            basketHeader.appendChild(basketText);
             document.body.appendChild(basketHeader);
             var list = document.createElement("li");
-            var nameToList = encodeHTML(data[i].name); //document.getElementById("nameInput").value;
-            var quantityToList = data[i].quantity; //document.getElementById("quantityInput").value;
-            var priceToList = data[i].price; //document.getElementById("priceInput").value;
-            var taxToList = data[i].tax; //document.getElementById("taxInput").value;
+            var nameToList = encodeHTML(data[i].name); 
+            var quantityToList = data[i].quantity; 
+            var priceToList = data[i].price; 
+            var taxToList = data[i].tax; 
             list.appendChild(document.createTextNode("Name: "+nameToList+", Quantity: "+quantityToList+", Price: "+priceToList+", Tax: "+taxToList));
             basketHeader.appendChild(list);
             
@@ -116,8 +116,8 @@ function deleteFruit(id3){
 //DELETE FRONTEND -- deleting specific selected fruit from the front end
 function deleteFrontFruit(){
     var elem = document.querySelectorAll('#bask');
-    console.log(elem);
-    console.log(elem.length);
+    //console.log(elem);
+    //console.log(elem.length);
 
     for(i=0; i< elem.length;i++)
     {
